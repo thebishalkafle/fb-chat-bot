@@ -4,8 +4,6 @@ import json
 import random
 import wolframalpha
 import requests
-import time
-import math
 import sqlite3
 import os
 import concurrent.futures
@@ -36,7 +34,47 @@ driver = webdriver.Chrome(
 
 class ChatBot(Client):
 
-        self.markAsDelivered(author_id, thread_id)
+    def onMessage(self, mid=None, author_id=None, message_object=None, thread_id=None, thread_type=ThreadType.USER, **kwargs):
+        try:
+            msg = str(message_object).split(",")[15][14:-1]
+            if ("//video.xx.fbcdn" in msg):
+                msg = msg
+            else:
+                msg = str(message_object).split(",")[19][20:-1]
+        except:
+            try:
+                msg=(message_object.text).lower()
+            except:
+                pass
+
+        def sendMsg():
+            if (author_id != self.uid):
+                self.send(Message(text=reply), thread_id=thread_id,
+                          thread_type=thread_type)
+        def sendQuery():
+                self.send(Message(text=reply), thread_id=thread_id,
+                          thread_type=thread_type)
+        if(author_id == self.uid):
+            pass
+        else:
+            try:
+                conn=sqlite3.connect("messages.db")
+                c=conn.cursor()
+                c.execute("""
+                CREATE TABLE IF NOT EXISTS "{}" (
+                    mid text PRIMARY KEY,
+                    message text NOT NULL
+                );
+                """.format(str(author_id).replace('"', '""')))
+
+                c.execute("""
+                INSERT INTO "{}" VALUES (?, ?)
+                """.format(str(author_id).replace('"', '""')), (str(mid), msg))
+                conn.commit()
+                conn.close()
+            except:
+                pass
+
 
     def onMessageUnsent(self, mid=None, author_id=None, thread_id=None, thread_type=None, ts=None, msg=None):
         if(author_id == self.uid):
@@ -80,13 +118,12 @@ class ChatBot(Client):
             except:
                 pass
 
-
 cookies = {
         "sb":"EgGOYbgd-29y0H50aTh6TLDt",
         "fr":"0tiPxfZsgjSHoD9FZ.AWXxDhmuDg6xQ5l0huw4sbHY2r0.BiM9L7.S3.AAA.0.0.BiM9Rn.AWW2_oeJp8E",
         "c_user":"100025593090377",
         "datr":"EgGOYQfUf-AMsPcFN6FGBvti",
-        "xs":"16%3AIze60yLhi1FisA%3A2%3A1646704465%3A-1%3A3601%3A%3AAcXUDsuUe5pK5lYlVaNyf0u1SdJqyYIUUgO2kbebL1Y"
+        "xs":"16%3AIze60yLhi1FisA%3A2%3A1646704465%3A-1%3A3601%3A%3AAcVVPrJ9Ab3p2aXqfCmFNDQAXa0sOnfpa2d8Dhd9zPg"
        }
 
 
