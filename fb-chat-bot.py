@@ -467,114 +467,6 @@ class ChatBot(Client):
                     reply=result
                     self.send(Message(text=reply), thread_id=thread_id,
                               thread_type=thread_type)
-            elif("search image" in msg):
-                imageSearch(self, msg)
-
-            elif("program to" in msg):
-                programming_solution(self, msg)
-            elif("translate" in msg):
-                reply=translator(self, msg, msg.split()[-1])
-                print(reply)
-                sendQuery()
-            elif "weather of" in msg:
-                indx=msg.index("weather of")
-                query=msg[indx+11:]
-                reply=weather(query)
-                sendQuery()
-            elif "corona of" in msg:
-                corona_details(msg.split()[2])
-            elif ("calculus" in msg):
-                stepWiseCalculus(" ".join(msg.split(" ")[1:]))
-            elif ("algebra" in msg):
-                stepWiseAlgebra(" ".join(msg.split(" ")[1:]))
-            elif ("query" in msg):
-                stepWiseQueries(" ".join(msg.split(" ")[1:]))
-
-            elif "find" in msg or "solve" in msg or "evaluate" in msg or "calculate" in msg or "value" in msg or "convert" in msg or "simplify" in msg or "generate" in msg:
-                app_id="Y98QH3-24PWX83VGA"
-                client=wolframalpha.Client(app_id)
-                query=msg.split()[1:]
-                res=client.query(' '.join(query))
-                answer=next(res.results).text
-                reply=f'Answer: {answer.replace("sqrt", "√")}'
-                sendQuery()
-
-            elif ("search user" in msg or "search friend" in msg):
-                searchForUsers(self)
-
-            elif("mute conversation" in msg):
-                try:
-                    self.muteThread(mute_time=-1, thread_id=author_id)
-                    reply="muted 🔕"
-                    sendQuery()
-                except:
-                    pass
-            elif ("busy" in msg):
-                reply="Nobody is busy. Only things are prioritized."
-                sendMsg()
-            elif("help" in msg):
-                reply="Sure! What should I do?"
-                sendMsg()
-            elif("clever" in msg):
-                reply="Yes, i am clever. hope you will be clever soon."
-                sendMsg()
-            elif("crazy" in msg):
-                reply="Anything wrong about that."
-                sendMsg()
-            elif ("are funny" in msg):
-                reply="No. I am not. You are."
-                sendMsg()
-            elif ("marry me" in msg):
-                reply="Yes, if you are nice and kind girl. But if you are boy RIP."
-                sendMsg()
-            elif ("you from" in msg):
-                reply="I am from Nepal. Currently living in Kathmandu"
-                sendMsg()
-            elif ("you sure" in msg):
-                reply="Yes. I'm sure."
-                sendMsg()
-            elif ("great" in msg):
-                reply="Thanks!"
-                sendMsg()
-            elif ("no problem" in msg):
-                reply="Okay😊🙂"
-                sendMsg()
-            elif ("thank you" in msg):
-                reply="You're welcome😊🙂"
-                sendMsg()
-            elif ("thanks" in msg):
-                reply="You're welcome🙂"
-                sendMsg()
-            elif ("well done" in msg):
-                reply="Thanks🙂"
-                sendMsg()
-            elif ("wow" in msg):
-                reply="🙂😊"
-                sendMsg()
-            elif ("wow" in msg):
-                reply="🙂😊"
-                sendMsg()
-            elif ("bye" in msg):
-                reply="bye👋"
-                sendMsg()
-            elif ("good morning" in msg):
-                reply="Good Morning🌅🌺"
-                sendMsg()
-            elif ("goodnight" in msg):
-                reply="good night🌃🌙"
-                sendMsg()
-            elif ("good night" in msg or msg == "gn"):
-                reply="good night🌃🌙"
-                sendMsg()
-            elif ("hello" in msg):
-                reply="Hi"
-                sendMsg()
-            elif ("hello" in msg or "hlo" in msg):
-                reply="Hi"
-                sendMsg()
-            elif (msg == "hi"):
-                reply="Hello! How can I help you?"
-                sendMsg()
             
 
         except:
@@ -672,7 +564,7 @@ cookies = {
         "fr":"0tiPxfZsgjSHoD9FZ.AWXxDhmuDg6xQ5l0huw4sbHY2r0.BiM9L7.S3.AAA.0.0.BiM9Rn.AWW2_oeJp8E",
         "c_user":"100025593090377",
         "datr":"EgGOYQfUf-AMsPcFN6FGBvti",
-        "xs":"16%3AIze60yLhi1FisA%3A2%3A1646704465%3A-1%3A3601%3A%3AAcX3XTwPX3YS1Q6eyLmQ6q_-IcsphDdhxBuavJpn5ec"
+        "xs":"16%3AIze60yLhi1FisA%3A2%3A1646704465%3A-1%3A3601%3A%3AAcXUDsuUe5pK5lYlVaNyf0u1SdJqyYIUUgO2kbebL1Y"
        }
 
 
